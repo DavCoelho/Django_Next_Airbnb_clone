@@ -2,6 +2,7 @@ import Image from "next/image";
 import ReservationSidebar from "../../components/properties/ReservationSidebar";
 
 import apiService from "../../services/apiService";
+import { getUserId } from "../../lib/actions";
 
 const PropertyDetailPage = async ({
   params,
@@ -10,13 +11,16 @@ const PropertyDetailPage = async ({
 }) => {
   const { id } = await params;
   const property = await apiService.get(`/api/properties/${id}`);
+  const userId = await getUserId();
+
+  console.log("userId", userId);
 
   return (
     <main className="max-w-375 mx-auto px-6 pb-6">
       <div className="w-full h-[64vh] mb-4 overflow-hidden rounded-xl relative">
         <Image
           fill
-          src="/beach_1.jpeg"
+          src={property.image_url}
           alt="Beach house"
           className="object-cover w-full h-full "
         />
@@ -53,7 +57,7 @@ const PropertyDetailPage = async ({
           <p className="mt-6 text-lg">{property.description}</p>
         </div>
 
-        <ReservationSidebar property={property} />
+        <ReservationSidebar property={property} userId={userId} />
       </div>
     </main>
   );
