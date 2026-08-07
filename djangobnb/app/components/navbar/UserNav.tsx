@@ -6,12 +6,15 @@ import LogoutButton from "../LogoutButton";
 
 import useLoginModal from "../../hooks/useLoginModal";
 import useSignupModal from "../../hooks/useSignupModal";
+import { useRouter } from "next/navigation";
 
 interface UsernavProps {
   userId?: string | null;
 }
 
 const UserNav = ({ userId }: UsernavProps) => {
+  const router = useRouter();
+
   const loginModal = useLoginModal();
   const signupModal = useSignupModal();
 
@@ -55,7 +58,25 @@ const UserNav = ({ userId }: UsernavProps) => {
       {isOpen && (
         <div className="w-55 absolute top-15 right-0 bg-white border rounded-xl shadow-md flex flex-col cursor-pointer">
           {userId ? (
-            <LogoutButton />
+            <>
+              <MenuLink
+                label="My properties"
+                onClick={() => {
+                  setIsOpen(false);
+                  router.push("/myproperties");
+                }}
+              />
+
+              <MenuLink
+                label="My reservations"
+                onClick={() => {
+                  setIsOpen(false);
+                  router.push("/myreservations");
+                }}
+              />
+
+              <LogoutButton />
+            </>
           ) : (
             <>
               <MenuLink
