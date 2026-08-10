@@ -29,7 +29,9 @@ const LandlordDetailPage = async ({
 
             <h1 className="mt-6 text-2xl">{landlord.name}</h1>
 
-            {userId != landlord_id && <ContactButton />}
+            {userId != landlord_id && (
+              <ContactButton userId={userId} landlordId={landlord_id} />
+            )}
           </div>
         </aside>
 

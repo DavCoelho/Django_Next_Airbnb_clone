@@ -38,16 +38,16 @@ const PropertyDetailPage = async ({
 
           <Link
             href={`/landlords/${property.landlord.id}`}
-            className="py-6 flex items-center space-x-4"
+            className="py-6 flex items-center gap-3"
           >
-            {property.landlord.avatar_url && (
+            <div className="relative w-20 h-20 shrink-0">
               <Image
-                fill
                 src={property.landlord.avatar_url}
-                alt="Beach house"
-                className="object-cover w-full h-full "
+                fill
+                alt="Host"
+                className="rounded-full object-cover"
               />
-            )}
+            </div>
 
             <p>
               <strong>{property.landlord.name}</strong> is your host
