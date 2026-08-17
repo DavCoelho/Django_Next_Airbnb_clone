@@ -3,7 +3,7 @@
 if [ "$DATABASE" = "postgres" ]; then
     echo "Checking if database is running..."
 
-    while ! nc -z $SQL_HOST $SQL_PORT; do
+    while ! python -c "import socket; s = socket.socket(); s.connect(('$SQL_HOST', int('$SQL_PORT')))" 2>/dev/null; do
         sleep 0.1
     done
 
