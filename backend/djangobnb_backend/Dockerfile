@@ -18,3 +18,4 @@ RUN chmod +x /usr/src/djangobnb_backend/entrypoint.sh
 COPY . .
 
 ENTRYPOINT [ "/usr/src/djangobnb_backend/entrypoint.sh" ]
+CMD ["gunicorn", "djangobnb_backend.wsgi:application", "--bind", "0.0.0.0:8000"]
