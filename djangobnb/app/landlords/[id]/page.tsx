@@ -24,7 +24,7 @@ const LandlordDetailPage = async ({
               width={200}
               height={200}
               alt="Landlord name"
-              className="rounded-full object-cover"
+              className="w-50 h-50 rounded-full object-cover"
             />
 
             <h1 className="mt-6 text-2xl">{landlord.name}</h1>
