@@ -1,18 +1,13 @@
 import os
-
-from channels.auth import AuthMiddlewareStack
-from channels.routing import ProtocolTypeRouter, URLRouter
-from channels.security.websocket import AllowedHostsOriginValidator
-
-from chat import routing
-from chat.token_auth import TokenAuthMiddleWare
-
-from django.core.asgi import get_asgi_application
+import django
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangobnb_backend.settings')
+django.setup()
 
-application = get_asgi_application()
-
+from channels.routing import ProtocolTypeRouter, URLRouter
+from chat import routing
+from chat.token_auth import TokenAuthMiddleWare
+from django.core.asgi import get_asgi_application
 
 application = ProtocolTypeRouter({
     'http': get_asgi_application(),
