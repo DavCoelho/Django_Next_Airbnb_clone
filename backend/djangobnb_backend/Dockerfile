@@ -17,6 +17,9 @@ RUN chmod +x /usr/src/djangobnb_backend/entrypoint.sh
 
 COPY . .
 
+RUN python manage.py collectstatic --noinput --settings=djangobnb_backend.settings
+RUN SECRET_KEY=dummy-build-key python manage.py collectstatic --noinput
+
 ENV DJANGO_SETTINGS_MODULE djangobnb_backend.settings
 
 ENTRYPOINT [ "/usr/src/djangobnb_backend/entrypoint.sh" ]
