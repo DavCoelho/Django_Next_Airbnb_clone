@@ -17,5 +17,7 @@ RUN chmod +x /usr/src/djangobnb_backend/entrypoint.sh
 
 COPY . .
 
+ENV DJANGO_SETTINGS_MODULE djangobnb_backend.settings
+
 ENTRYPOINT [ "/usr/src/djangobnb_backend/entrypoint.sh" ]
 CMD ["daphne", "-b", "0.0.0.0", "-p", "8000", "djangobnb_backend.asgi:application"]
