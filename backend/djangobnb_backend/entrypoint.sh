@@ -24,7 +24,11 @@ ls -la /usr/src/djangobnb_backend/staticfiles/ || true
 echo "===== END STATIC ROOT TEST ====="
 
 echo "===== STORAGE TEST ====="
-python manage.py shell -c "from django.conf import settings; from django.core.files.storage import storages; from django.contrib.staticfiles import finders; s=storages['staticfiles']; print('STATIC_ROOT:', settings.STATIC_ROOT); print('STATIC STORAGE:', s.__class__); print('STORAGE LOCATION:', s.location); print('DESTINATION EXISTS:', s.exists('admin/css/base.css')); print('DESTINATION PATH:', s.path('admin/css/base.css')); print('FINDER RESULT:', finders.find('admin/css/base.css'))"
+
+python manage.py shell -c "from django.core.files.storage import storages; s=storages['staticfiles']; print('CLASS:', s.__class__); print('LOCATION:', s.location)"
+python manage.py shell -c "from django.core.files.storage import storages; s=storages['staticfiles']; print('EXISTS:', s.exists('admin/css/base.css'))"
+python manage.py shell -c "from django.contrib.staticfiles import finders; print('FINDER:', finders.find('admin/css/base.css'))"
+
 echo "===== END STORAGE TEST ====="
 
 python manage.py collectstatic --noinput --verbosity 2
