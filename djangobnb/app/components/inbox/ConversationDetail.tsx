@@ -20,7 +20,7 @@ const ConversationDetail = ({
   token,
   messages,
 }: ConversationDetailProps) => {
-  const messagesDiv = useRef(null);
+  const messagesDiv = useRef<HTMLDivElement>(null);
 
   const [newMessage, setNewMessage] = useState("");
 
@@ -84,7 +84,7 @@ const ConversationDetail = ({
 
   const scrollToBottom = () => {
     if (messagesDiv.current) {
-      messagesDiv.current.scrollTop = messagesDiv.current.scrollheight;
+      messagesDiv.current.scrollTop = messagesDiv.current.scrollHeight;
     }
   };
 
