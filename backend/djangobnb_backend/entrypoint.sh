@@ -31,7 +31,7 @@ python manage.py shell -c "from django.contrib.staticfiles import finders; print
 
 echo "===== END STORAGE TEST ====="
 
-python manage.py collectstatic --noinput --verbosity 2
+python manage.py collectstatic --noinput --clear --verbosity 2
 
 echo "===== AFTER COLLECTSTATIC ====="
 ls -la /usr/src/djangobnb_backend/staticfiles/ || true
