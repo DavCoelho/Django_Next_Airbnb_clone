@@ -10,3 +10,5 @@ channels==4.0.0
 daphne==4.0.0
 gunicorn
 channels_redis
+cloudinary
+django-cloudinary-storage
