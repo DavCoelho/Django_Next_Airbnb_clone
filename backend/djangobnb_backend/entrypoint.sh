@@ -13,16 +13,31 @@ fi
 python manage.py makemigrations
 python manage.py migrate
 
-echo "===== PREPARING STATIC FILES ====="
+echo "===== STATIC FILE SETUP ====="
 
-mkdir -p /usr/src/djangobnb_backend/staticfiles/admin
+STATIC_DIR="/usr/src/djangobnb_backend/staticfiles"
+DJANGO_STATIC="/usr/local/lib/python3.12/site-packages/django/contrib/admin/static/admin"
 
-cp -r /usr/local/lib/python3.12/site-packages/django/contrib/admin/static/admin/* \
-    /usr/src/djangobnb_backend/staticfiles/admin/
+mkdir -p "$STATIC_DIR/admin"
 
-echo "Django admin static files copied:"
-find /usr/src/djangobnb_backend/staticfiles/admin -type f | head -20
+echo "Source directory:"
+ls -la "$DJANGO_STATIC"
 
-echo "===== END PREPARING STATIC FILES ====="
+echo "Copying admin static files..."
+
+cp -rv "$DJANGO_STATIC/"* "$STATIC_DIR/admin/"
+
+echo "===== STATIC DIRECTORY AFTER COPY ====="
+find "$STATIC_DIR" -type f | head -30
+
+echo "===== CHECKING BASE.CSS ====="
+if [ -f "$STATIC_DIR/admin/css/base.css" ]; then
+    echo "SUCCESS: base.css exists"
+    ls -l "$STATIC_DIR/admin/css/base.css"
+else
+    echo "ERROR: base.css DOES NOT EXIST"
+fi
+
+echo "===== END STATIC FILE SETUP ====="
 
 exec "$@"
