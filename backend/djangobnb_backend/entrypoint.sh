@@ -12,6 +12,11 @@ fi
 
 python manage.py makemigrations
 python manage.py migrate
+
+echo "===== STATIC FILE TEST ====="
+python manage.py findstatic admin/css/base.css --verbosity 2
+echo "===== END STATIC FILE TEST ====="
+
 python manage.py collectstatic --noinput --verbosity 2
 
 exec "$@"
