@@ -54,7 +54,7 @@ def properties_list(request):
         all_matches = []
 
         for reservation in exact_matches | overlap_matches:
-            all_matches.append(reservation.property.id)
+            all_matches.append(str(reservation.property.id))
 
         properties = properties.exclude(id__in=all_matches)
 
@@ -78,7 +78,7 @@ def properties_list(request):
     if user:
         for property in properties:
             if user in property.favorited.all():
-                favorites.append(property.id)
+                favorites.append(str(property.id))  # ← convert to string
     #
     serializer = PropertiesListSerializer(properties, many=True)
 
