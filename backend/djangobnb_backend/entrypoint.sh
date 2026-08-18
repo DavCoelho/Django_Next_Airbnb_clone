@@ -13,19 +13,16 @@ fi
 python manage.py makemigrations
 python manage.py migrate
 
-echo "===== CREATING STATIC DIRECTORY ====="
-mkdir -p /usr/src/djangobnb_backend/staticfiles
-echo "Static directory created:"
-ls -la /usr/src/djangobnb_backend/staticfiles
-echo "===== END CREATING STATIC DIRECTORY ====="
+echo "===== PREPARING STATIC FILES ====="
 
-echo "===== COLLECTING STATIC FILES ====="
-python manage.py collectstatic --noinput --clear --verbosity 2
-echo "===== END COLLECTING STATIC FILES ====="
+mkdir -p /usr/src/djangobnb_backend/staticfiles/admin
 
-echo "===== CHECKING COLLECTED FILES ====="
-ls -la /usr/src/djangobnb_backend/staticfiles/
-find /usr/src/djangobnb_backend/staticfiles/ -type f | head -20
-echo "===== END CHECKING COLLECTED FILES ====="
+cp -r /usr/local/lib/python3.12/site-packages/django/contrib/admin/static/admin/* \
+    /usr/src/djangobnb_backend/staticfiles/admin/
+
+echo "Django admin static files copied:"
+find /usr/src/djangobnb_backend/staticfiles/admin -type f | head -20
+
+echo "===== END PREPARING STATIC FILES ====="
 
 exec "$@"
