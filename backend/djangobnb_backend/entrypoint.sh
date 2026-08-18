@@ -13,29 +13,19 @@ fi
 python manage.py makemigrations
 python manage.py migrate
 
-echo "===== STATIC FILE TEST ====="
-python manage.py findstatic admin/css/base.css --verbosity 2
-echo "===== END STATIC FILE TEST ====="
+echo "===== CREATING STATIC DIRECTORY ====="
+mkdir -p /usr/src/djangobnb_backend/staticfiles
+echo "Static directory created:"
+ls -la /usr/src/djangobnb_backend/staticfiles
+echo "===== END CREATING STATIC DIRECTORY ====="
 
-echo "===== STATIC ROOT TEST ====="
-ls -la /usr/src/djangobnb_backend/
-echo "----- staticfiles -----"
-ls -la /usr/src/djangobnb_backend/staticfiles/ || true
-echo "===== END STATIC ROOT TEST ====="
-
-echo "===== STORAGE TEST ====="
-
-python manage.py shell -c "from django.core.files.storage import storages; s=storages['staticfiles']; print('CLASS:', s.__class__); print('LOCATION:', s.location)"
-python manage.py shell -c "from django.core.files.storage import storages; s=storages['staticfiles']; print('EXISTS:', s.exists('admin/css/base.css'))"
-python manage.py shell -c "from django.contrib.staticfiles import finders; print('FINDER:', finders.find('admin/css/base.css'))"
-
-echo "===== END STORAGE TEST ====="
-
+echo "===== COLLECTING STATIC FILES ====="
 python manage.py collectstatic --noinput --clear --verbosity 2
+echo "===== END COLLECTING STATIC FILES ====="
 
-echo "===== AFTER COLLECTSTATIC ====="
-ls -la /usr/src/djangobnb_backend/staticfiles/ || true
-find /usr/src/djangobnb_backend/staticfiles/ -type f | head -20 || true
-echo "===== END AFTER COLLECTSTATIC ====="
+echo "===== CHECKING COLLECTED FILES ====="
+ls -la /usr/src/djangobnb_backend/staticfiles/
+find /usr/src/djangobnb_backend/staticfiles/ -type f | head -20
+echo "===== END CHECKING COLLECTED FILES ====="
 
 exec "$@"
