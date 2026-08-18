@@ -12,3 +12,4 @@ gunicorn
 channels_redis
 cloudinary
 django-cloudinary-storage
+whitenoise
