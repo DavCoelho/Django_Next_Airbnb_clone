@@ -18,7 +18,15 @@ RUN chmod +x /usr/src/djangobnb_backend/entrypoint.sh
 
 COPY . .
 
-RUN SECRET_KEY=dummy-build-key python manage.py collectstatic --noinput
+RUN SECRET_KEY=dummy-build-key \
+    DATABASE=dummy \
+    SQL_ENGINE=django.db.backends.sqlite3 \
+    SQL_DATABASE=dummy \
+    SQL_USER=dummy \
+    SQL_PASSWORD=dummy \
+    SQL_HOST=dummy \
+    SQL_PORT=5432 \
+    python manage.py collectstatic --noinput
 
 ENTRYPOINT [ "/usr/src/djangobnb_backend/entrypoint.sh" ]
 CMD ["daphne", "-b", "0.0.0.0", "-p", "8000", "djangobnb_backend.asgi:application"]
