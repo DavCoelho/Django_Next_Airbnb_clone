@@ -99,7 +99,7 @@ const ConversationDetail = ({
             key={index}
             className={`w-4/5 py-4 px-6 rounded-xl ${message.created_by.name == myUser?.name ? "ml-[20%] bg-blue-200" : "bg-gray-200"}`}
           >
-            <p className="font-bold text-gray-500">{message.name}</p>
+            <p className="font-bold text-gray-500">{message.created_by.name}</p>
 
             <p>{message.body}</p>
           </div>
@@ -108,9 +108,9 @@ const ConversationDetail = ({
         {realtimeMessages.map((message, index) => (
           <div
             key={index}
-            className={`w-4/5 py-4 px-6 rounded-xl ${message.name == myUser?.name ? "ml-[20%] bg-blue-200" : "bg-gray-200"}`}
+            className={`w-4/5 py-4 px-6 rounded-xl ${message.created_by.name == myUser?.name ? "ml-[20%] bg-blue-200" : "bg-gray-200"}`}
           >
-            <p className="font-bold text-gray-500">{message.name}</p>
+            <p className="font-bold text-gray-500">{message.created_by.name}</p>
 
             <p>{message.body}</p>
           </div>
