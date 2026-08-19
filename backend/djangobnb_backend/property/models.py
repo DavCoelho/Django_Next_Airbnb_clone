@@ -23,8 +23,13 @@ class Property(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def image_url(self):
-        return self.image.url
-        # return f'{settings.WEBSITE_URL}{self.image.url}'
+        image_url = self.image.url
+        if image_url.startswith('http'):
+            # Cloudinary URL - already absolute, return as is
+            return image_url
+        else:
+            # Local file - needs WEBSITE_URL prefix
+            return f'{settings.WEBSITE_URL}{image_url}'
 
 
 class Reservation(models.Model):

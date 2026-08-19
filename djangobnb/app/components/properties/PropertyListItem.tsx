@@ -10,6 +10,7 @@ interface PropertyProps {
 
 const PropertyListItem = ({ property, markFavorite }: PropertyProps) => {
   const router = useRouter();
+  console.log(property.image_url);
 
   return (
     <div
