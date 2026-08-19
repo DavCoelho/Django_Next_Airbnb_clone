@@ -13,3 +13,4 @@ channels_redis
 cloudinary
 django-cloudinary-storage
 whitenoise
+python-dotenv==1.2.3
