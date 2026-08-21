@@ -42,7 +42,11 @@ const PropertyDetailPage = async ({
           >
             <div className="relative w-20 h-20 shrink-0">
               <Image
-                src={property.landlord.avatar_url}
+                src={
+                  property.landlord.avatar_url
+                    ? property.landlord.avatar_url
+                    : "/no_user_avatar.png"
+                }
                 fill
                 alt="Host"
                 className="rounded-full object-cover"

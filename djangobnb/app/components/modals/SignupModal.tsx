@@ -15,12 +15,14 @@ const SignupModal = () => {
   const signupModal = useSignupModal();
 
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
 
   const submitSignup = async () => {
     const formData = {
+      name: name,
       email: email,
       password1: password1,
       password2: password2,
@@ -53,6 +55,13 @@ const SignupModal = () => {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Your email address"
           type="email"
+          className="px-4 w-full h-14 border border-gray-300 rounded-xl"
+        />
+
+        <input
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Your name"
+          type="text"
           className="px-4 w-full h-14 border border-gray-300 rounded-xl"
         />
 
